@@ -1,65 +1,64 @@
-.card{
-    border-radius: 10px;
-    background: linear-gradient(
-      -145deg,
-      rgba(222, 222, 222, 0.765) 0%,
-      rgba(255, 255, 255, 1) 100%
-    );
-    padding: 1.5rem;
-    box-shadow: inset -1px -1px 2px 0px rgba(212, 212, 212, 0.5),
+.card {
+  border-radius: 10px;
+  background: linear-gradient(
+    -145deg,
+    rgba(222, 222, 222, 0.765) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  padding: 1.5rem;
+  box-shadow: inset -1px -1px 2px 0px rgba(212, 212, 212, 0.5),
     -4px -4px 8px 0px rgba(255, 255, 255, 0.9), 4px 4px 8px 0px #d4d4d4e9,
     4px -4px 8px 0px #d4d4d446;
-    width: 100%;
-    /* gap:0.5rem;
+  width: 100%;
+  /* gap:0.5rem;
     display: flex;  
     flex-direction: column; */
 }
-.cardHeader{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    border-bottom: 3px solid var(--text-green);
-    padding-bottom: 0.5rem;
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid var(--text-green);
+  padding-bottom: 0.5rem;
 }
-.textInfo{
+.textInfo {
   font-size: 13px;
   color: var(--text-grey);
 }
-.textInfo>span{
-    font-weight: 700;
-  
+.textInfo > span {
+  font-weight: 700;
 }
-.metricBox{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-   margin-bottom: 0.5rem;
-    background: linear-gradient(
-        -45deg,
-        rgba(222, 222, 222, 0.765) 0%,
-        rgba(255, 255, 255, 1) 100%
-      );
-      padding: 0.5rem;
-      box-shadow: inset -1px -1px 2px 0px rgba(212, 212, 212, 0.5),
-      -4px -4px 8px 0px rgba(255, 255, 255, 0.9), 4px 4px 8px 0px #d4d4d4e9,
-      4px -4px 8px 0px #d4d4d446;
+.metricBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(
+    -45deg,
+    rgba(222, 222, 222, 0.765) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  padding: 0.5rem;
+  box-shadow: inset -1px -1px 2px 0px rgba(212, 212, 212, 0.5),
+    -4px -4px 8px 0px rgba(255, 255, 255, 0.9), 4px 4px 8px 0px #d4d4d4e9,
+    4px -4px 8px 0px #d4d4d446;
 }
-.metricBox>p{
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
+.metricBox > p {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
-.metricBox>p>span{
-   font-weight: 800;
-   font-size:18px;
+.metricBox > p > span {
+  font-weight: 800;
+  font-size: 18px;
 }
-.cardFooter{
-   display: flex;
-   justify-content: flex-end;
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
 }
-.accentButton{
-    background: var(--gradient-green);
+.accentButton {
+  background: var(--gradient-green);
   fill: #fff;
   padding: 0.6rem;
   border: none;

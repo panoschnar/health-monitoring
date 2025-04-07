@@ -44,5 +44,5 @@ export function validateForm(formData: IFormData): string | null {
     return "Please enter a valid age.";
   }
 
-  return null; // No errors!
+  return null; 
 }

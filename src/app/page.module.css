@@ -1,6 +1,6 @@
 .container {
   padding: 1rem 6rem;
-    width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,13 +16,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-  width: 100%;}
+  width: 100%;
+}
 
-  /* ------------------------ RESPONSIVE ------------------------ */
+/* ------------------------ RESPONSIVE ------------------------ */
 @media screen and (width<=769px) {
   .container {
     padding: 1rem 2rem;
-  }}
+  }
+}
 @media screen and (width<=321px) {
   .container {
     padding: 1rem;

@@ -1,26 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
-  --background-color: linear-gradient(
-    297deg,
-    #E8E8E8 0%,
-    #FFFFFF 100%
-  );
+  --background-color: linear-gradient(297deg, #e8e8e8 0%, #ffffff 100%);
   --text-grey: #969494;
   --text-green: #07c7b1;
   --text-black: #333347;
-  --gradient-green: linear-gradient(
-    297deg,
-    #00EACE 0%,
-    #007795 100%
-  );}
+  --gradient-green: linear-gradient(297deg, #00eace 0%, #007795 100%);
+}
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
-
 
 html,
 body {
@@ -55,7 +47,7 @@ body {
   height: 100%;
   width: 100%;
   font-family: "Montserrat", "Manrope", sans-serif;
-  color:var(--text-black);
+  color: var(--text-black);
   transition: all 0.2s ease-in-out;
 }
 

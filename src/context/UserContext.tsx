@@ -1,8 +1,6 @@
-// context/UserContext.tsx
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Define the types for the context value
 interface UserContextType {
   isLoggedIn: boolean;
   access_token: string | null;
