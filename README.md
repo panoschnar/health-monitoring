@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Patients Health Monitoring App
+This module allows authenticated users to register new patients into the system via a structured form. It is built with **Next.js**, uses **React hooks**, and includes validation and authentication logic.
 
 ## Getting Started
 
@@ -18,19 +19,27 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+-  Log In with protected route using user authentication (`useUser` context).
+-  On Landing Page view all Patients List
+-  On view details navigate to a Patient Details Page
+-  Add Patient through form includes:
+  - Personal info (name, age, AMKA)
+  - Contact info (phone, email)
+  - Address details (street, number, city, postal code)
+  - Facility ID, gender, external patient flag
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- Custom `UserContext` for authentication state
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Screeshots
+![Landing Page with Patients List](/public/patientsList.jpg)
+![Patient Details Page](/public/patientDetails.jpg)
+![Patient Registration Form](/public/addPatient.jpg)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -1,0 +1,108 @@
+.primary {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-green);
+  font-size: 15px !important;
+  font-weight: 600;
+  border-radius: 10px;
+  background: linear-gradient(
+    45deg,
+    rgba(222, 222, 222, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  gap: 0.3rem;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+  font-size: 20px;
+  justify-content: center;
+  flex-direction: row;
+  box-shadow: inset -1px -1px 2px 0px rgba(212, 212, 212, 0.5),
+    -4px -4px 8px 0px rgba(255, 255, 255, 0.9), 4px 4px 8px 0px #d4d4d4e9,
+    4px -4px 8px 0px #d4d4d446;
+  border: none;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.primary > svg {
+  fill: var(--text-green) !important;
+}
+.primary:hover > svg {
+  fill: #fff !important;
+}
+
+.primary:hover {
+  background: var(--gradient-green);
+  color: #fff;
+}
+
+.primary:focus {
+  transform: scale(0.98);
+}
+
+.secondary {
+  border-radius: 10px;
+  border: 1px solid var(--text-green);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+  text-decoration: none;
+  font-size: 20px;
+  justify-content: center;
+  color: var(--text-green);
+  transition: all 0.3s;
+  gap: 0.3rem;
+}
+.secondary > svg {
+  fill: var(--text-green) !important;
+}
+.secondary:hover > svg {
+  fill: #fff !important;
+}
+.secondary:hover {
+  background: var(--gradient-green);
+  color: #fff;
+}
+
+.secondary:focus {
+  transform: scale(0.98);
+}
+
+.accentButton {
+  background: var(--gradient-green);
+  color: #fff;
+  padding: 0.6rem;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border-radius: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px !important;
+  font-weight: 600;
+}
+.accentButton > svg {
+  fill: var(--text-green) !important;
+}
+.accentButton:hover > svg {
+  fill: #fff !important;
+}
+
+.accentButton:hover {
+  box-shadow: inset -1px -1px 8px 0px rgb(153, 153, 153),
+    inset 4px 4px 10px 0px rgba(106, 106, 106, 0.564);
+}
+
+.accentButton:focus {
+  transform: scale(0.98);
+}
+
+/* ------------------------ RESPONSIVE ------------------------ */
+@media screen and (width<=426px) {
+  .primary,
+  .secondary,
+  .accentButton {
+    font-size: 13px !important;
+  }
+}

@@ -1,0 +1,34 @@
+.container {
+  top: 0;
+  align-items: center;
+  padding: 1rem 6rem;
+  width: 100%;
+  background: var(--background-color);
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 6px 10px 0px rgba(199, 199, 199, 0.9);
+}
+.notifUserBox {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+/* ------------------------ RESPONSIVE ------------------------ */
+@media screen and (width<=769px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+  .logoBox {
+    transform: scale(0.8);
+  }
+}
+/* ------------------------ RESPONSIVE ------------------------ */
+@media screen and (width<=321px) {
+  .container {
+    padding: 1rem 1rem;
+  }
+  .notifUserBox>button>span {
+   display:none;
+  }
+}
