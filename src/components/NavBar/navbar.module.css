@@ -13,22 +13,97 @@
   gap: 0.3rem;
   align-items: center;
 }
+.dropdownWrapper {
+  position: relative;
+  display: inline-block;
+}
+.dropdownWrapper > button > p {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: var(--text-grey);
+  font-weight: 300;
+}
+.dropdownWrapper > button > p > span {
+  font-weight: 700;
+}
+.dropdownMenu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background: linear-gradient(
+    -45deg,
+    rgb(228, 228, 228) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  border-radius: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+}
 
+.dropdownItem {
+  padding: 0.75rem 1rem;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px !important;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  text-decoration: none;
+  color: #525151;
+
+}
+
+.dropdownItem > svg {
+  fill: var(--text-green);
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+  color: var(--text-green);
+  font-weight: 600;
+}
+
+.logoBox svg {
+  width: clamp(100px, 10vw, 180px);
+  height: auto;
+}
 /* ------------------------ RESPONSIVE ------------------------ */
 @media screen and (width<=769px) {
   .container {
     padding: 1rem 2rem;
   }
-  .logoBox {
-    transform: scale(0.8);
-  }
+  /* .logoBox svg {
+    width: 90%;
+  } */
 }
 /* ------------------------ RESPONSIVE ------------------------ */
-@media screen and (width<=321px) {
+@media screen and (width<=450px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+  /* .logoBox svg {
+    width: 80%;
+  } */
+  .notifUserBox > .dropdownWrapper > button > p {
+    display: none;
+  }
+}
+
+@media screen and (width<=375px) {
   .container {
     padding: 1rem 1rem;
   }
-  .notifUserBox > button > span {
+  /* .logoBox svg {
+    width: 60%;
+  } */
+  .notifUserBox > .dropdownWrapper > button > p {
     display: none;
   }
 }

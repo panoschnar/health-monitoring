@@ -12,6 +12,13 @@
   align-items: center;
   width: 100%;
 }
+.textInfo {
+  font-size: 13px;
+  color: var(--text-grey);
+}
+.textInfo > span {
+  font-weight: 700;
+}
 .mainBox {
   background: var(--background-color);
   padding: 2rem;

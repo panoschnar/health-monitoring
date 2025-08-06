@@ -2,7 +2,12 @@
 //Get All patients 
 export async function POST(req: Request) {
   const { access_token } = await req.json();
-
+  if (!access_token) {
+    return new Response(
+      JSON.stringify({ error: 'Access token is required' }),
+      { status: 401 }
+    );
+  }
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("API_KEY", `${process.env.API_KEY}`);
@@ -16,16 +21,16 @@ export async function POST(req: Request) {
 
   try {
     const response = await fetch(
-      `${process.env.API_URL}/patients?user_id=1`,
+      `${process.env.API_URL}/patients`,
       requestOptions
     );
-
     if (!response.ok) {
-      throw new Error(`Error on getting patients: ${response.status}`);
+      const errorText = await response.text();
+      throw new Error(`API responded with status ${response.status}: ${errorText}`);
     }
 
     const data = await response.json();
-
+console.log(data)
     return new Response(JSON.stringify(data), { status: 200 });
   } catch (error: any) {
     console.error("Error on getting patients:", error);

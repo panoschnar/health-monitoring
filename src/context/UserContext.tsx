@@ -1,5 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
+import {jwtDecode} from "jwt-decode";
+import { useRouter } from "next/navigation";
 
 interface UserContextType {
   isLoggedIn: boolean;
@@ -10,17 +12,30 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [access_token, setAccessToken] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
-      setAccessToken(token);
-      setIsLoggedIn(true);
+      try {
+        const decoded: { exp: number } = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+
+        if (decoded.exp < currentTime) {
+          // Token expired
+          logout();
+        } else {
+          // Token valid
+          setAccessToken(token);
+          setIsLoggedIn(true);
+        }
+      } catch (err) {
+        console.error("Invalid token", err);
+        logout();
+      }
     }
   }, []);
 
@@ -34,6 +49,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.removeItem("access_token");
     setAccessToken(null);
     setIsLoggedIn(false);
+    router.push("/"); 
   };
 
   return (

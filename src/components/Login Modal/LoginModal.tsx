@@ -4,7 +4,7 @@ import button from "../../app/buttons.module.css";
 import { useUser } from "../../context/UserContext"; // Import the context
 
 interface FormData {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -14,7 +14,7 @@ interface LoginModalProps {
 }
 
 const initialFormData: FormData = {
-  username: "",
+  email: "",
   password: "",
 };
 
@@ -27,7 +27,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
     e.preventDefault();
     setError("");
 
-    if (!formData.username || !formData.password) {
+    if (!formData.email || !formData.password) {
       setError("Both fields are required.");
       return;
     }
@@ -39,7 +39,7 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: formData.username,
+          email: formData.email,
           password: formData.password,
         }),
       });
@@ -74,15 +74,15 @@ const LoginModal = ({ isOpen, onClose }: LoginModalProps) => {
         </button>
         <h2 className={styles.title}>Login</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <label htmlFor="username" className={styles.label}>
-            Username
+          <label htmlFor="email" className={styles.label}>
+            Email
           </label>
           <input
-            type="username"
-            placeholder="Username"
-            value={formData.username}
+            type="email"
+            placeholder="email"
+            value={formData.email}
             onChange={(e) =>
-              setFormData({ ...formData, username: e.target.value })
+              setFormData({ ...formData, email: e.target.value })
             }
             className={styles.input}
           />

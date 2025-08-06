@@ -5,6 +5,7 @@ import styles from "./patient.module.css";
 import button from "../../buttons.module.css";
 import {
   accelIcon,
+  addIcon,
   backArrowIcon,
   bloodPressureIcon,
   heartRateIcon,
@@ -12,39 +13,60 @@ import {
 import { useParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import BloodPressureChart from "@/components/Charts/BloodPressureChart";
-import { IPatient } from "@/utils/interfaces";
+import { IPatient, MyJwtPayload } from "@/utils/interfaces";
+import { jwtDecode } from "jwt-decode";
+import MeasurementModal from "@/components/Measurement Modal/MeasurementModal";
 
 const page = () => {
   const { id } = useParams();
   const { isLoggedIn, access_token } = useUser();
   const [patient, setPatient] = useState<IPatient>();
   const [loading, setLoading] = useState(false);
-
+  const [measurements, setMeasurements] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = access_token ? jwtDecode<MyJwtPayload>(access_token) : null;
+  // const role = decoded?.role;
+  console.log(user);
   useEffect(() => {
     if (isLoggedIn && access_token) {
       setLoading(true);
-      fetch("/api/get-patient", {
+      fetch("/api/patient", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ access_token: access_token, patient_id: id }),
+        body: JSON.stringify({ access_token: access_token, id: id }),
       })
         .then((response) => response.json())
         .then((data) => {
-          setPatient(data[0]);
+          setPatient(data);
           setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching patients:", error);
           setLoading(false);
         });
+
+      fetch(`/api/get-patient-measurements`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ access_token, patientId: id }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setMeasurements(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching measurements:", error);
+        });
     }
   }, [isLoggedIn, access_token]);
 
-if(!isLoggedIn || !access_token){
-  return (
-    <div className={styles.container}>
+  if (!isLoggedIn || !access_token || !user) {
+    return (
+      <div className={styles.container}>
         <div className={styles.titleBox}>
           <h4>Please Log In to preview patient!</h4>
           <Link className={button.primary} href={"/"}>
@@ -52,8 +74,8 @@ if(!isLoggedIn || !access_token){
           </Link>
         </div>
       </div>
-  );
-}
+    );
+  }
 
   if (loading) {
     return (
@@ -75,17 +97,31 @@ if(!isLoggedIn || !access_token){
       </div>
     );
   }
- 
+
   return (
     <div className={styles.container}>
       <div className={styles.titleBox}>
-        <h4>Patient Details</h4>
         <Link className={button.primary} href={"/"}>
           {backArrowIcon}
         </Link>
+        {(user?.role === "doctor" || user?.role === "nurse") && (
+          <button
+            className={button.primary}
+            onClick={() => setIsModalOpen(true)}
+          >
+            {addIcon} Add Measurements
+          </button>
+        )}
       </div>
+
       <div className={styles.mainBox}>
         <h4>{patient.firstname + " " + patient.lastname}</h4>
+        <p className={styles.textInfo}>
+          Email: <span> {patient.email ? patient.email : "-"}</span>
+        </p>
+        <p className={styles.textInfo}>
+          Ethnicity: <span> {patient.ethnicity ? patient.ethnicity : "-"}</span>
+        </p>
         <p>
           {patient.address_street +
             " " +
@@ -128,15 +164,21 @@ if(!isLoggedIn || !access_token){
               <p>{accelIcon} Z Accel:</p>
               <p>
                 {" "}
-                <span>{patient.z_accel}</span> m/s<sup>2</sup>
+                <span>{Number(patient.z_accel).toFixed(2)}</span> m/s
+                <sup>2</sup>
               </p>
             </div>
           )}
         </div>
       </div>
       <div className={styles.mainBox}>
-      <BloodPressureChart/>
+        <BloodPressureChart data={measurements} />
       </div>
+      <MeasurementModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        patientId={id}
+      />
     </div>
   );
 };

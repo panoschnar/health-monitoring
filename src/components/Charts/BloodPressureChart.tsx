@@ -1,8 +1,16 @@
 import React, { useRef } from "react";
 import styles from "./charts.module.css";
 import ReactECharts from "echarts-for-react";
-const BloodPressureChart = () => {
+import { IMeasurement } from "@/utils/interfaces";
+import { getBloodPressureChartData } from "@/utils/helper";
+
+const BloodPressureChart = ({ data }: { data: IMeasurement[] }) => {
   const chartRef = useRef<any>(null);
+  const chartData = getBloodPressureChartData(data);
+  const dates = chartData.map((d) => d.date);
+  const systolic = chartData.map((d) => d.SYS_BLOOD_PRESSURE ?? null);
+  const diastolic = chartData.map((d) => d.DIA_BLOOD_PRESSURE ?? null);
+
   const chartOptions = {
     tooltip: {
       trigger: "axis",
@@ -31,7 +39,7 @@ const BloodPressureChart = () => {
       {
         type: "category",
         boundaryGap: false,
-        data: Array.from({ length: 31 }, (_, i) => `${i + 1} April`),
+        data: dates,
       },
     ],
     yAxis: [
@@ -55,11 +63,7 @@ const BloodPressureChart = () => {
         emphasis: {
           focus: "series",
         },
-        data: [
-          120, 122, 119, 125, 130, 128, 126, 127, 125, 124, 123, 122, 124, 126,
-          128, 129, 130, 128, 126, 124, 125, 127, 128, 130, 132, 131, 129, 128,
-          126, 125, 124,
-        ],
+        data: systolic,
       },
       {
         name: "Diastolic",
@@ -71,13 +75,13 @@ const BloodPressureChart = () => {
         emphasis: {
           focus: "series",
         },
-        data: [
-          80, 82, 81, 83, 85, 84, 82, 81, 80, 79, 78, 77, 78, 79, 80, 81, 82,
-          83, 82, 81, 80, 79, 80, 81, 82, 83, 84, 85, 84, 83, 82,
-        ],
+        data: diastolic,
       },
     ],
   };
+  if (!Array.isArray(data) || data.length <= 0 || systolic.length <=0 || diastolic.length <=0) {
+    return <p>No Blood Measuremnts for this Patient yet!</p>;
+  }
   return (
     <div className={styles.chartBox}>
       <ReactECharts

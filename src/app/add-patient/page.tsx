@@ -6,8 +6,8 @@ import { backArrowIcon } from "../../../public/icons";
 import Link from "next/link";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
-import { IFormData } from "@/utils/interfaces";
-import { initialFormData, validateForm } from "@/utils/helper";
+import { IFormData, SexType } from "@/utils/interfaces";
+import { ethnicities, initialFormData, validateForm } from "@/utils/helper";
 
 const Page = () => {
   const { isLoggedIn, access_token } = useUser();
@@ -25,8 +25,8 @@ const Page = () => {
     if (isLoggedIn && access_token) {
       setLoading(true);
       try {
-        const response = await fetch("/api/add-patient", {
-          method: "POST",
+        const response = await fetch("/api/patient", {
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -115,6 +115,18 @@ const Page = () => {
             />
           </div>
           <div className={styles.input}>
+            <label className={styles.label}>Phone Number</label>
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={formData.phone_number}
+              onChange={(e) =>
+                setFormData({ ...formData, phone_number: e.target.value })
+              }
+            />
+          </div>
+
+          {/* <div className={styles.input}>
             <label className={styles.label}>Facility ID *</label>
             <input
               type="number"
@@ -127,7 +139,7 @@ const Page = () => {
                 })
               }
             />
-          </div>
+          </div> */}
           <div className={styles.subBox}>
             <div className={styles.input}>
               <label className={styles.label}>Street</label>
@@ -179,22 +191,11 @@ const Page = () => {
           </div>
           <div className={styles.subBox}>
             <div className={styles.input}>
-              <label className={styles.label}>Phone Number</label>
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={formData.phonenumber}
-                onChange={(e) =>
-                  setFormData({ ...formData, phonenumber: e.target.value })
-                }
-              />
-            </div>
-            <div className={styles.input}>
               <label className={styles.label}>Sex</label>
               <select
-                value={formData.sex}
+                value={formData.sex || ""}
                 onChange={(e) =>
-                  setFormData({ ...formData, sex: e.target.value })
+                  setFormData({ ...formData, sex: e.target.value as SexType })
                 }
               >
                 <option value="">Select Sex</option>
@@ -203,29 +204,34 @@ const Page = () => {
               </select>
             </div>
             <div className={styles.input}>
-              <label className={styles.label}>Age</label>
+              <label className={styles.label}>Date of Birth</label>
               <input
-                type="number"
-                placeholder="Age"
-                value={formData.age}
+                type="date"
+                placeholder="dd-mm-yyyy"
+                value={formData.birth_date}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    age: e.target.value ? parseInt(e.target.value) : 0,
+                    birth_date: e.target.value,
                   })
                 }
               />
             </div>
             <div className={styles.input}>
-              <label className={styles.label}>AMKA</label>
-              <input
-                type="text"
-                placeholder="AMKA"
-                value={formData.amka}
+              <label className={styles.label}>Ethnicity</label>
+              <select
+                value={formData.ethnicity || ""}
                 onChange={(e) =>
-                  setFormData({ ...formData, amka: e.target.value })
+                  setFormData({ ...formData, ethnicity: e.target.value })
                 }
-              />
+              >
+                <option value="">Select Ethnicity</option>
+                {ethnicities.map((ethnicity) => (
+                  <option key={ethnicity} value={ethnicity}>
+                    {ethnicity}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 

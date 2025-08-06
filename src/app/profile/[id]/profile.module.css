@@ -1,0 +1,21 @@
+.container {
+    padding: 1rem 6rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .titleBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .textInfo {
+    font-size: 13px;
+    color: var(--text-grey);
+  }
+  .textInfo > span {
+    font-weight: 700;
+  }
