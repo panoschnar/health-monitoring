@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@/components/Footer/Footer";
 import NavBar from "@/components/NavBar/NavBar";
 import { UserProvider } from "@/context/UserContext";
+import { ChatbotWrapper } from "@/utils/ChatBotWrapper";
 
 export const metadata: Metadata = {
   title: "Health Monitoring",
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
+        <ChatbotWrapper/>
         <body>
           <div className="mainContainer">
             <div className="main">
@@ -26,6 +28,7 @@ export default function RootLayout({
             </div>
           </div>
         </body>
+
       </UserProvider>
     </html>
   );
